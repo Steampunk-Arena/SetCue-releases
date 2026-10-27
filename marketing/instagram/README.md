@@ -1,6 +1,6 @@
 # SetCue Instagram set
 
-Generated from `source/desk-setup.png`.
+Generated from `source/desk-setup.png`, using the app icon in `source/setcue-icon.svg`.
 
 | File | Size | Use |
 | --- | --- | --- |

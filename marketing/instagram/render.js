@@ -18,8 +18,8 @@ const CSS = `
     --violet: #7b4dff;
     --violet-deep: #1c0a5c;
     --ink: #0b0512;
-    --pink: #ff4fd8;
-    --cyan: #3ee8ff;
+    --pink: #fa56b0;
+    --cyan: #57e4ee;
     --text: #f4efff;
     --muted: #b9a8e8;
   }
@@ -73,7 +73,7 @@ const CSS = `
     font-weight: 700;
     background: linear-gradient(90deg, var(--pink), var(--violet));
     color: white;
-    box-shadow: 0 0 40px rgba(255, 79, 216, 0.45);
+    box-shadow: 0 0 40px rgba(250, 86, 176, 0.45);
   }
   .platforms {
     font-family: 'JetBrains Mono', monospace;
@@ -85,7 +85,7 @@ const CSS = `
     overflow: hidden;
     border-radius: 22px;
     border: 2px solid rgba(185, 140, 255, 0.55);
-    box-shadow: 0 0 0 8px rgba(123, 77, 255, 0.12), 0 0 80px rgba(255, 79, 216, 0.35), 0 30px 80px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 0 8px rgba(123, 77, 255, 0.12), 0 0 80px rgba(250, 86, 176, 0.35), 0 30px 80px rgba(0, 0, 0, 0.6);
     background-color: var(--ink);
   }
   .dots { display: flex; gap: 12px; }
@@ -93,24 +93,18 @@ const CSS = `
   .dots i.on { background: var(--pink); box-shadow: 0 0 14px var(--pink); }
 `;
 
-function logo(size) {
+// The SetCue mark (bars from source/setcue-icon.svg) beside the wordmark.
+// With `tile`, the full rounded app icon is shown instead of the bare bars.
+const ICON_SVG = fs.readFileSync(path.join(ROOT, 'source', 'setcue-icon.svg'), 'utf8');
+const BARS = ICON_SVG.match(/<rect x="(?!48")[^>]*\/>/g).join('');
+
+function logo(size, { tile = false } = {}) {
   const h = size;
-  const bars = [0.45, 0.8, 1, 0.65, 0.35];
-  const bw = h * 0.12;
-  const gap = h * 0.08;
-  const rects = bars
-    .map((b, i) => {
-      const bh = h * b;
-      return `<rect x="${i * (bw + gap)}" y="${(h - bh) / 2}" width="${bw}" height="${bh}" rx="${bw / 2}" fill="url(#g)"/>`;
-    })
-    .join('');
-  const w = bars.length * (bw + gap) - gap;
+  const mark = tile
+    ? ICON_SVG.replace('<svg ', `<svg style="width:${h * 1.6}px;height:${h * 1.6}px" `)
+    : `<svg width="${h * 484 / 420}" height="${h}" viewBox="270 302 484 420">${BARS}</svg>`;
   return `<div class="logo">
-    <svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
-      <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#3ee8ff"/><stop offset="1" stop-color="#ff4fd8"/>
-      </linearGradient></defs>${rects}
-    </svg>
+    ${mark}
     <span style="font-size:${h * 1.05}px">setcue</span>
   </div>`;
 }
@@ -244,7 +238,7 @@ function featureSlide(f, index) {
   const left = (W - width) / 2;
   const top = 470 + (maxCardH - height) / 2;
   return page(W, H, `
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 45% at 50% ${(top + height / 2) / H * 100}%, rgba(255,79,216,0.22), transparent 70%)"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 45% at 50% ${(top + height / 2) / H * 100}%, rgba(250,86,176,0.22), transparent 70%)"></div>
     <div style="position:absolute;left:72px;right:72px;top:72px;display:flex;justify-content:space-between;align-items:center">
       ${logo(34)}
       <div class="mono" style="font-size:24px;color:var(--muted)">${String(index + 1).padStart(2, '0')} / ${String(SLIDE_COUNT).padStart(2, '0')}</div>
@@ -270,7 +264,7 @@ function ctaSlide() {
     <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 40% at 50% 34%, rgba(123,77,255,0.45), transparent 70%)"></div>
     ${screenCrop({ x: crop.x + 20, y: crop.y + 15, w: crop.w - 40, h: crop.h - 60 }, (W - width) / 2, 110, width)}
     <div style="position:absolute;left:72px;right:72px;top:${110 + height + 40}px;text-align:center">
-      <div style="display:flex;justify-content:center">${logo(46)}</div>
+      <div style="display:flex;justify-content:center">${logo(46, { tile: true })}</div>
       <h1 style="font-size:84px;margin-top:30px">Try every feature<br><em>free for 14 days.</em></h1>
       <div class="pill" style="font-size:32px;padding:22px 40px;margin-top:40px">Link in bio</div>
       <div class="platforms" style="font-size:24px;margin-top:28px">WINDOWS · MACOS · LINUX</div>
