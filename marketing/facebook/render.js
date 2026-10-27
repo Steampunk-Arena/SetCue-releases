@@ -148,7 +148,34 @@ const posts = [
   })],
 ];
 
+// ---------- Introduction post with the launch discount (1080×1350) ----------
+function intro() {
+  const W = 1080, H = 1350;
+  return page(W, H, `
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 40% at 50% 38%, rgba(123,77,255,0.45), transparent 70%)"></div>
+    <div style="position:absolute;left:72px;right:72px;top:68px">
+      <div class="kicker" style="font-size:24px">Meet SetCue · Desktop DJ</div>
+      <h1 style="font-size:80px;margin-top:18px">Your music. Your vibes.<br><em>Let's go.</em></h1>
+    </div>
+    ${shot('lyrics', { x: 0, y: 0, w: 3200, h: 2000 }, 72, 300, 936)}
+    <div style="position:absolute;left:72px;right:72px;top:${300 + 2000 * 936 / 3200 + 52}px;display:flex;align-items:center;gap:44px">
+      <div style="flex:none;text-align:center;padding:26px 34px;border-radius:24px;background:linear-gradient(135deg,var(--pink),var(--violet));box-shadow:0 0 50px rgba(250,86,176,0.45)">
+        <div style="font-size:92px;font-weight:800;letter-spacing:-0.04em;line-height:1">15% off</div>
+        <div class="mono" style="font-size:22px;letter-spacing:0.16em;margin-top:10px">LAUNCH OFFER</div>
+      </div>
+      <div>
+        <div style="font-size:32px;line-height:1.35">For our first customers: use code</div>
+        <div style="display:inline-block;font-size:56px;font-weight:800;color:var(--cyan);letter-spacing:0.06em;
+          border:3px dashed var(--cyan);border-radius:14px;padding:6px 22px;margin-top:12px">15OFF</div>
+        <div style="font-size:26px;line-height:1.4;color:var(--muted);margin-top:14px">Try every feature free for 14 days first.</div>
+      </div>
+    </div>
+    ${FOOTER}
+  `);
+}
+
 renderJobs([
+  ['post-0-introducing-setcue.png', 1080, 1350, intro()],
   ['profile-icon.png', 720, 720, icon()],
   ['cover-banner.png', 1640, 624, banner()],
   ...posts.map(([name, html]) => [name, 1080, 1350, html]),

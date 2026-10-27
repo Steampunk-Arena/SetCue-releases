@@ -12,6 +12,17 @@
 
 Post the images in order; each is 1080×1350.
 
+### 0. Introducing SetCue + launch offer (`out/post-0-introducing-setcue.png`)
+
+Meet SetCue: the desktop DJ app for the music already on your computer. 🎧
+
+Two decks with auto fades, a visualizer you can pop out to a second screen, lyrics on screen, music videos, and DJ lights that follow the beat. No streaming account, no subscription.
+
+🎉 **Launch offer:** our first customers get **15% off** with code **15OFF** at checkout.
+
+Try every feature free for 14 days first, then grab your licence when you're ready:
+👉 getsetcue.com
+
 ### 1. Save a playlist (`out/post-1-save-a-playlist.png`)
 
 Build your set once, play it all night. 🎧

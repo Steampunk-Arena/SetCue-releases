@@ -4,6 +4,7 @@
 | --- | --- | --- |
 | `out/profile-icon.png` | 720×720 | Profile picture |
 | `out/cover-banner.png` | 1640×624 | Cover photo |
+| `out/post-0-introducing-setcue.png` | 1080×1350 | Introduction post with the 15OFF launch offer |
 | `out/post-1-save-a-playlist.png` … `out/post-5-covers-and-lyrics-with-ai.png` | 1080×1350 | How-to posts |
 
 Captions and Page setup text are in `posts.md`.
