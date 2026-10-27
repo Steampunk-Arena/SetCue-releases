@@ -278,23 +278,29 @@ function ctaSlide() {
   `);
 }
 
-(async () => {
-  fs.mkdirSync(OUT, { recursive: true });
-  const jobs = [
+// Renders [[file, width, height, html], ...] to PNGs in outDir.
+async function renderJobs(jobs, outDir) {
+  fs.mkdirSync(outDir, { recursive: true });
+  const browser = await chromium.launch();
+  const tab = await browser.newPage({ deviceScaleFactor: 1 });
+  for (const [name, w, h, html] of jobs) {
+    await tab.setViewportSize({ width: w, height: h });
+    await tab.setContent(html, { waitUntil: 'load' });
+    await tab.evaluate(() => document.fonts.ready);
+    await tab.screenshot({ path: path.join(outDir, name), clip: { x: 0, y: 0, width: w, height: h } });
+    console.log('wrote', name);
+  }
+  await browser.close();
+}
+
+module.exports = { PHOTO, PHOTO_W, PHOTO_H, APP_W, APP_H, MONITOR, logo, screenCrop, page, renderJobs };
+
+if (require.main === module) {
+  renderJobs([
     ['feed-hero.png', 1080, 1350, feedHero()],
     ['story.png', 1080, 1920, story()],
     ['carousel-01-cover.png', 1080, 1350, feedHero({ swipe: true })],
     ...FEATURES.map((f, i) => [f.file, 1080, 1350, featureSlide(f, i + 1)]),
     [`carousel-0${SLIDE_COUNT}-cta.png`, 1080, 1350, ctaSlide()],
-  ];
-  const browser = await chromium.launch();
-  const page_ = await browser.newPage({ deviceScaleFactor: 1 });
-  for (const [name, w, h, html] of jobs) {
-    await page_.setViewportSize({ width: w, height: h });
-    await page_.setContent(html, { waitUntil: 'load' });
-    await page_.evaluate(() => document.fonts.ready);
-    await page_.screenshot({ path: path.join(OUT, name), clip: { x: 0, y: 0, width: w, height: h } });
-    console.log('wrote', name);
-  }
-  await browser.close();
-})();
+  ], OUT);
+}
