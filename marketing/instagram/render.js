@@ -10,6 +10,11 @@ const PHOTO_W = 1672;
 const PHOTO_H = 941;
 const OUT = path.join(ROOT, 'out');
 
+// Full-resolution app screenshot used for the close-up feature slides.
+const APP = 'data:image/png;base64,' + fs.readFileSync(path.join(ROOT, 'source', 'app-screenshot.png')).toString('base64');
+const APP_W = 1912;
+const APP_H = 1011;
+
 // Monitor bounds inside the source photo (px), used to frame every crop.
 const MONITOR = { x: 425, y: 70, w: 825, h: 540 };
 
@@ -118,12 +123,12 @@ function photoAt({ x, y, w }, dx, dy, dw, extraStyle = '') {
     background-position:${dx - x * s}px ${dy - y * s}px;${extraStyle}"></div>`;
 }
 
-// A cropped region of the on-screen UI, shown as a glowing "screen" card.
+// A cropped region of the app screenshot, shown as a glowing "screen" card.
 function screenCrop({ x, y, w, h }, left, top, width) {
   const s = width / w;
   return `<div class="screen" style="left:${left}px;top:${top}px;width:${width}px;height:${h * s}px;
-    background-image:url('${PHOTO}');background-repeat:no-repeat;
-    background-size:${PHOTO_W * s}px ${PHOTO_H * s}px;
+    background-image:url('${APP}');background-repeat:no-repeat;
+    background-size:${APP_W * s}px ${APP_H * s}px;
     background-position:${-x * s}px ${-y * s}px;"></div>`;
 }
 
@@ -190,35 +195,35 @@ const FEATURES = [
     kicker: 'Two decks',
     title: 'Now playing.<br><em>On deck.</em>',
     body: 'Load the next track while the current one plays, with level and headphone cue on each deck.',
-    crop: { x: 452, y: 220, w: 440, h: 142 },
+    crop: { x: 28, y: 337, w: 978, h: 282 },
   },
   {
     file: 'carousel-03-tempo.png',
     kicker: 'Auto DJ',
     title: 'Tempo-matched<br><em>auto fades.</em>',
     body: 'Set a target BPM, pick a fade length, and let SetCue walk the tempo and crossfade into the next track.',
-    crop: { x: 455, y: 368, w: 435, h: 125 },
+    crop: { x: 28, y: 632, w: 978, h: 242 },
   },
   {
     file: 'carousel-04-visualizer.png',
     kicker: 'Visualizer',
     title: 'Watch the<br><em>music move.</em>',
-    body: 'Built-in visualizer styles and colour schemes, plus a lyrics display, all running alongside your set.',
-    crop: { x: 448, y: 122, w: 760, h: 90 },
+    body: 'Pick a visualizer style and colour scheme, then switch on lyrics, titles and lights while you play.',
+    crop: { x: 28, y: 118, w: 1515, h: 206 },
   },
   {
     file: 'carousel-05-playlist.png',
     kicker: 'Set builder',
     title: 'Build the set.<br><em>Record the mix.</em>',
-    body: 'Arrange tracks, see BPM and total set length at a glance, save your sets, and hit record.',
-    crop: { x: 876, y: 228, w: 336, h: 300 },
+    body: 'Arrange tracks, see BPM and total set length at a glance, save and share sets, and hit record.',
+    crop: { x: 1018, y: 337, w: 875, h: 659 },
   },
   {
     file: 'carousel-06-outputs.png',
     kicker: 'Outputs',
     title: 'Speakers out.<br><em>Cue in your cans.</em>',
     body: 'Send the main mix to your speakers and a pre-fader cue to your headphones.',
-    crop: { x: 462, y: 503, w: 430, h: 64 },
+    crop: { x: 28, y: 885, w: 978, h: 111 },
   },
 ];
 const SLIDE_COUNT = FEATURES.length + 2;
@@ -257,12 +262,12 @@ function featureSlide(f, index) {
 
 function ctaSlide() {
   const W = 1080, H = 1350;
-  const crop = MONITOR;
-  const width = 900;
+  const crop = { x: 0, y: 36, w: APP_W, h: APP_H - 36 };
+  const width = 936;
   const height = crop.h * (width / crop.w);
   return page(W, H, `
     <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 40% at 50% 34%, rgba(123,77,255,0.45), transparent 70%)"></div>
-    ${screenCrop({ x: crop.x + 20, y: crop.y + 15, w: crop.w - 40, h: crop.h - 60 }, (W - width) / 2, 110, width)}
+    ${screenCrop(crop, (W - width) / 2, 110, width)}
     <div style="position:absolute;left:72px;right:72px;top:${110 + height + 40}px;text-align:center">
       <div style="display:flex;justify-content:center">${logo(46, { tile: true })}</div>
       <h1 style="font-size:84px;margin-top:30px">Try every feature<br><em>free for 14 days.</em></h1>

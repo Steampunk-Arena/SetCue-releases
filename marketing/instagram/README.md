@@ -1,6 +1,6 @@
 # SetCue Instagram set
 
-Generated from `source/desk-setup.png`, using the app icon in `source/setcue-icon.svg`.
+Hero images use `source/desk-setup.png`; feature close-ups use `source/app-screenshot.png`; the logo comes from `source/setcue-icon.svg`.
 
 | File | Size | Use |
 | --- | --- | --- |
@@ -20,4 +20,4 @@ node marketing/instagram/render.js
 
 Needs Node with Playwright and the Inter / JetBrains Mono fonts installed.
 
-The feature slides zoom into the monitor in the photo, so their UI detail is soft. To sharpen them, swap the `crop` rects for real app screenshots.
+Feature-slide crops are pixel rects in `source/app-screenshot.png` (1912×1011); update them if you replace the screenshot.
