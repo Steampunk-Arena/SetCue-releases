@@ -202,7 +202,46 @@ function follow() {
   `);
 }
 
+// ---------- Quote cards (1080×1350) ----------
+// One big quote over a full-bleed background: a 1080×1350 visualizer frame (source/bg-*.jpg) or the desk photo.
+// `at` puts the quote at the top or bottom, whichever side the background leaves dark.
+function quoteCard({ quote, who, bg, at = 'top', size = 92 }) {
+  const W = 1080, H = 1350;
+  const back = bg === 'desk'
+    ? photoBackground()
+    : `<div style="position:absolute;inset:0;background:url('${shots[bg]}') center/cover no-repeat"></div>`;
+  const shade = at === 'top'
+    ? 'linear-gradient(180deg, rgba(11,5,18,0.9) 0%, rgba(11,5,18,0.6) 34%, rgba(11,5,18,0) 55%, rgba(11,5,18,0) 82%, rgba(11,5,18,0.85) 100%)'
+    : 'linear-gradient(180deg, rgba(11,5,18,0.35) 0%, rgba(11,5,18,0) 18%, rgba(11,5,18,0) 42%, rgba(11,5,18,0.75) 62%, rgba(11,5,18,0.96) 100%)';
+  const text = `
+    ${who ? '<div style="font-size:150px;line-height:0.6;font-weight:800;color:var(--pink);height:64px">“</div>' : ''}
+    <h1 style="font-size:${size}px;line-height:1.04">${quote}</h1>
+    ${who ? `<div class="mono" style="font-size:28px;color:var(--cyan);letter-spacing:0.08em;margin-top:30px">— ${who}</div>` : ''}`;
+  return page(W, H, `
+    ${back}
+    <div style="position:absolute;inset:0;background:${shade}"></div>
+    <div style="position:absolute;left:72px;right:72px;${at === 'top' ? 'top:96px' : 'bottom:190px'}">${text}</div>
+    ${FOOTER}
+  `);
+}
+
+// The desk photo, cropped to portrait around the monitor.
+function photoBackground() {
+  const H = 1350, s = H / PHOTO_H;
+  const dx = 540 - (MONITOR.x + MONITOR.w / 2) * s;
+  return `<div class="photo" style="left:0;top:0;width:100%;height:100%;background-size:${PHOTO_W * s}px ${H}px;background-position:${dx}px 0"></div>`;
+}
+
+const quotes = [
+  ['quote-1-founder.png', { quote: 'I built a music mixer for myself because I couldn\'t afford the subscription fees.', who: 'Steve D., Founder', bg: 'desk', at: 'bottom', size: 74 }],
+  ['quote-2-llama.png', { quote: 'It really kicks the llama\'s ass.', who: 'Old music hound', bg: 'bg-cargrid', at: 'top' }],
+  ['quote-3-mood-lighting.png', { quote: 'I love ambient mood lighting.', who: 'Gamer', bg: 'bg-gateway', at: 'top' }],
+  ['quote-4-second-monitor.png', { quote: 'My second monitor finally has a job.', who: 'Desk setup guy', bg: 'bg-helix', at: 'bottom' }],
+  ['quote-5-sizzle.png', { quote: 'Your space could use more <em>sizzle.</em>', who: '', bg: 'bg-hyperspace', at: 'bottom', size: 104 }],
+];
+
 renderJobs([
+  ...quotes.map(([name, q]) => [name, 1080, 1350, quoteCard(q)]),
   ['post-6-follow-for-updates.png', 1080, 1350, follow()],
   ['post-0-introducing-setcue.png', 1080, 1350, intro()],
   ['profile-icon.png', 720, 720, icon()],

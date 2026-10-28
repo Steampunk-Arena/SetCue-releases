@@ -109,3 +109,33 @@ Also on the way:
 👍 **Follow the Page** and tap 🔔 to turn on notifications, so you'll see new releases first.
 
 Haven't tried SetCue yet? Every feature is free for 14 days: getsetcue.com
+
+## Quote cards
+
+One quote per post, each 1080×1350. Short captions keep the quote the star.
+
+### Quote 1: founder (`out/quote-1-founder.png`)
+
+No subscriptions. No streaming. Just your music, two decks and a light show. 🎧
+Try it free for 14 days: getsetcue.com
+
+### Quote 2: old music hound (`out/quote-2-llama.png`)
+
+For everyone who still has a folder called "MP3s (DO NOT DELETE)". 💾
+Your library, mixed like a set: getsetcue.com
+
+### Quote 3: gamer (`out/quote-3-mood-lighting.png`)
+
+Visuals that move with your music, on a second screen, a TV or a projector. And on Windows, real DJ lights that change color on the beat. 💡
+getsetcue.com
+
+### Quote 4: desk setup guy (`out/quote-4-second-monitor.png`)
+
+Pop the visualizer out to your second screen and give it something to do. 🖥️✨
+20+ animated scenes, free for 14 days: getsetcue.com
+
+### Quote 5: sizzle (`out/quote-5-sizzle.png`)
+
+Your space could use more sizzle. 🔥
+SetCue turns the music on your computer into a DJ set with a light show.
+Free 14-day demo: getsetcue.com
