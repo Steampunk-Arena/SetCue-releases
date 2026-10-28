@@ -174,7 +174,36 @@ function intro() {
   `);
 }
 
+// ---------- Follow for updates, over a Starburst sneak peek (1080×1350) ----------
+// source/starburst.jpg is a 1920×1000 frame of the Starburst pattern (Liquid Gold palette).
+function follow() {
+  const W = 1080, H = 1350;
+  const coming = [
+    ['New visualizers', 'like Starburst, a gold light-speed burst'],
+    ['Mac &amp; Linux updates', 'music videos, DJ lights and MIDI'],
+    ['A Windows installer', 'with Start menu and desktop shortcuts'],
+  ];
+  return page(W, H, `
+    <div style="position:absolute;inset:0;background:url('${shots.starburst}') center/auto 100% no-repeat;filter:saturate(1.25) brightness(1.15)"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(11,5,18,0.9) 0%, rgba(11,5,18,0.4) 20%, rgba(11,5,18,0) 32%, rgba(11,5,18,0) 58%, rgba(11,5,18,0.85) 70%, rgba(11,5,18,0.97) 100%)"></div>
+    <div style="position:absolute;left:72px;right:72px;top:68px">
+      <div class="kicker" style="font-size:24px">Follow SetCue</div>
+      <h1 style="font-size:84px;margin-top:18px">More is coming.<br><em>Don't miss it.</em></h1>
+    </div>
+    <div class="mono" style="position:absolute;right:72px;top:560px;font-size:20px;letter-spacing:0.16em;padding:10px 18px;border-radius:999px;
+      background:rgba(11,5,18,0.7);border:1.5px solid rgba(255,214,120,0.7);color:#ffe08a">SNEAK PEEK · STARBURST</div>
+    <div style="position:absolute;left:72px;right:72px;top:930px">
+      <div class="kicker" style="font-size:22px;color:var(--muted)">On the way</div>
+      <div style="display:flex;flex-direction:column;gap:16px;margin-top:18px">${coming.map(([t, d]) => `
+        <div style="font-size:32px;line-height:1.3"><b>${t}</b> <span style="color:var(--muted)">· ${d}</span></div>`).join('')}
+      </div>
+    </div>
+    ${FOOTER}
+  `);
+}
+
 renderJobs([
+  ['post-6-follow-for-updates.png', 1080, 1350, follow()],
   ['post-0-introducing-setcue.png', 1080, 1350, intro()],
   ['profile-icon.png', 720, 720, icon()],
   ['cover-banner.png', 1640, 624, banner()],

@@ -94,3 +94,18 @@ No cover? No lyrics? Make them with AI. 🤖🎤
 Then switch on **LYRICS** on the visualizer bar and sing along. 🎶
 
 getsetcue.com
+
+### 6. Follow for updates (`out/post-6-follow-for-updates.png`)
+
+More is coming. Don't miss it. ✨
+
+Here's a sneak peek at **Starburst**, a new visualizer we're working on: a gold light-speed burst that rushes faster when the beat drops. 🌟
+
+Also on the way:
+🎬 Music videos, DJ lights and MIDI for **Mac and Linux**
+💻 A **Windows installer** with Start menu and desktop shortcuts
+🎨 More visualizers and color palettes
+
+👍 **Follow the Page** and tap 🔔 to turn on notifications, so you'll see new releases first.
+
+Haven't tried SetCue yet? Every feature is free for 14 days: getsetcue.com

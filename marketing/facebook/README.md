@@ -6,6 +6,7 @@
 | `out/cover-banner.png` | 1640×624 | Cover photo |
 | `out/post-0-introducing-setcue.png` | 1080×1350 | Introduction post with the 15OFF launch offer |
 | `out/post-1-save-a-playlist.png` … `out/post-5-covers-and-lyrics-with-ai.png` | 1080×1350 | How-to posts |
+| `out/post-6-follow-for-updates.png` | 1080×1350 | Follow for updates, with a Starburst sneak peek (`source/starburst.jpg`) |
 
 Captions and Page setup text are in `posts.md`.
 
