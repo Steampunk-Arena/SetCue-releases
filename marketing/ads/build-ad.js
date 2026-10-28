@@ -11,8 +11,8 @@ const { logo, page } = require('../instagram/render.js');
 
 const SONG = process.argv[2];
 const W = 1080, H = 1920, FPS = 30;
-const BEAT = 60 / 105;                 // "Joke's on You" runs at 105 BPM
-const SONG_START = 45.5;               // the chorus
+const BEAT = 60 / 90;                  // "Iron & Sweat" runs at 90 BPM
+const SONG_START = 50.88;              // 12 beats before the chorus, so it lands on "That's cool, we do too"
 const SRC = path.join(__dirname, 'source');
 const DESK = path.join(SRC, 'light-demo-1.mp4');     // 560×1312, 24 s
 const ROOM = path.join(SRC, 'light-demo-2.mp4');     // 1280×560, 38 s
@@ -48,16 +48,16 @@ const bg = {
 const SCENES = [
   { beats: 3, text: 'Hey you…', size: 150, y: 0.45, bg: bg.desk({ at: 0, dim: -0.55, blur: true }) },
   { beats: 3, text: 'Yes, <em>you</em> there.', size: 130, y: 0.45, bg: bg.desk({ at: 1.8, dim: -0.5, blur: true }) },
-  { beats: 7, text: 'The algorithm tells us that you\'re a person who likes <em>music and lighting.</em>', size: 84, y: 0.36, bg: bg.desk({ at: 3.5, dim: -0.12 }) },
-  { beats: 4, text: 'That\'s cool,<br><em>we do too.</em>', size: 120, y: 0.3, bg: bg.desk({ at: 17.3 }) },
-  { beats: 6, text: 'Download our<br><em>Desktop DJ</em>', size: 120, y: 0.24,
+  { beats: 6, text: 'The algorithm tells us that you\'re a person who likes <em>music and lighting.</em>', size: 84, y: 0.36, bg: bg.desk({ at: 3.5, dim: -0.12 }) },
+  { beats: 3, text: 'That\'s cool,<br><em>we do too.</em>', size: 120, y: 0.3, bg: bg.desk({ at: 17.3 }) },
+  { beats: 5, text: 'Download our<br><em>Desktop DJ</em>', size: 120, y: 0.24,
     bg: bg.card({ at: 8, image: 'lyrics.jpg', crop: '1700:2000:0:0', width: 1000, top: 700 }) },
-  { beats: 6, text: '…then look up<br><em>DMX 512 lighting…</em>', size: 100, y: 0.24, bg: bg.desk({ at: 6, dim: -0.05, zoom: 40 }) },
-  { beats: 6, text: '…then do a search for <em>MIDI controllers.</em>', size: 88, y: 0.2,
+  { beats: 5, text: '…then look up<br><em>DMX 512 lighting…</em>', size: 100, y: 0.24, bg: bg.desk({ at: 6, dim: -0.05, zoom: 40 }) },
+  { beats: 5, text: '…then do a search for <em>MIDI controllers.</em>', size: 88, y: 0.2,
     bg: bg.card({ at: 12, image: 'midi.jpg', crop: '1150:1500:0:0', width: 1000, top: 640 }) },
-  { beats: 6, text: 'Wait, these lights sync up <em>to videos?</em>', size: 92, y: 0.2, bg: bg.room({ at: 10 }) },
-  { beats: 5, text: 'Yes, they<br><em>absolutely do.</em>', size: 120, y: 0.2, bg: bg.room({ at: 30 }) },
-  { beats: 7, end: true, bg: bg.room({ at: 33, dim: -0.1 }) },
+  { beats: 5, text: 'Wait, these lights sync up <em>to videos?</em>', size: 92, y: 0.2, bg: bg.room({ at: 10 }) },
+  { beats: 4, text: 'Yes, they<br><em>absolutely do.</em>', size: 120, y: 0.2, bg: bg.room({ at: 30 }) },
+  { beats: 6, end: true, bg: bg.room({ at: 33, dim: -0.1 }) },
 ];
 
 function overlay(s) {

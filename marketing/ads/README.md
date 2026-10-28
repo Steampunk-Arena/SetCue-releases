@@ -2,19 +2,19 @@
 
 ## "Hey you…" (`out/setcue-hey-you-ad.mp4`)
 
-1080×1920, 30 s, for TikTok and Meta (Reels, Stories and feed ads). Text stays clear of TikTok's side buttons and caption area. Music: the "Joke's on You" chorus from the SetCue demo pack; cuts land on its beat (105 BPM).
+1080×1920, 30 s, for TikTok and Meta (Reels, Stories and feed ads). Text stays clear of TikTok's side buttons and caption area. Music: "Iron & Sweat" from the SetCue demo pack (from 0:50.9, so the chorus hits on "That's cool, we do too"); cuts land on its beat (90 BPM).
 
 | Time | Text | Footage |
 | --- | --- | --- |
 | 0:00 | Hey you… | Desk lights, blurred and dark |
 | 0:02 | Yes, you there. | Same |
-| 0:03 | The algorithm tells us that you're a person who likes music and lighting. | Desk, lights washing the wall |
-| 0:07 | That's cool, we do too. | Lights switch to magenta |
+| 0:04 | The algorithm tells us that you're a person who likes music and lighting. | Desk, lights washing the wall |
+| 0:08 | That's cool, we do too. | Lights switch to magenta |
 | 0:10 | Download our Desktop DJ | SetCue playing (screenshot) |
 | 0:13 | …then look up DMX 512 lighting… | The two RGB pars on the desk |
 | 0:17 | …then do a search for MIDI controllers. | SetCue's MIDI controller setup |
 | 0:20 | Wait, these lights sync up to videos? | Living room: TV and party lights |
-| 0:24 | Yes, they absolutely do. | Red and pink lights on the beat |
+| 0:23 | Yes, they absolutely do. | Red and pink lights on the beat |
 | 0:26 | Buy now and get 15% off with code 15OFF · getsetcue.com | End card |
 
 ### Captions
@@ -42,7 +42,7 @@
 Put the two light-demo videos in `source/` as `light-demo-1.mp4` (vertical desk clip) and `light-demo-2.mp4` (wide living-room clip), then:
 
 ```sh
-node marketing/ads/build-ad.js "<path to Joke's on You.mp3>"
+node marketing/ads/build-ad.js "<path to Iron & Sweat.mp3>"
 ```
 
 The source videos are kept out of git because this repository is public. The SetCue screens come from `../facebook/source/`.
