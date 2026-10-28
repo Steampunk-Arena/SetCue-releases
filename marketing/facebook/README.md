@@ -7,6 +7,7 @@
 | `out/post-0-introducing-setcue.png` | 1080×1350 | Introduction post with the 15OFF launch offer |
 | `out/post-1-save-a-playlist.png` … `out/post-5-covers-and-lyrics-with-ai.png` | 1080×1350 | How-to posts |
 | `out/post-6-follow-for-updates.png` | 1080×1350 | Follow for updates, with a Starburst sneak peek (`source/starburst.jpg`) |
+| `out/setcue-quotes-reel.mp4` | 1080×1920, 27 s | Reel: the five quotes over SetCue visuals reacting to "Joke's on You", then an end card. Rebuild with `node marketing/facebook/reel/make.js <SetCue app repo> <Joke's on You.mp3>` |
 | `out/quote-1-founder.png` … `out/quote-5-sizzle.png` | 1080×1350 | Quote cards over visualizer frames (`source/bg-*.jpg`, rendered at 1080×1350) and the desk photo |
 
 Captions and Page setup text are in `posts.md`.

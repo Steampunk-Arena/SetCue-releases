@@ -102,7 +102,9 @@ function serve() {
   const parts = [];
   for (const s of SCENES) {
     const n = Math.round(s.beats * BEAT * FPS), dir = path.join(WORK, s.id);
-    fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir);
+    // Frames from an earlier run are reused; delete work/ to render them again.
+    const done = fs.existsSync(dir) && fs.readdirSync(dir).length === n;
+    if (!done) { fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir); }
     const ov = path.join(WORK, s.id + '-overlay.png');
     await tab.setContent(overlay(s), { waitUntil: 'load' }); await tab.evaluate(() => document.fonts.ready);
     await tab.screenshot({ path: ov, omitBackground: true });
@@ -110,21 +112,23 @@ function serve() {
     if (s.bg === 'desk') {
       // Slow push-in on the desk photo, cropped to portrait around the monitor.
       const sc = H / PHOTO_H, cx = (MONITOR.x + MONITOR.w / 2) * sc;
-      ff('-loop', '1', '-i', path.join(__dirname, '..', '..', 'instagram', 'source', 'desk-setup.png'), '-i', ov, '-filter_complex',
+      ff('-loop', '1', '-i', path.join(__dirname, '..', '..', 'instagram', 'source', 'desk-setup.png'), '-loop', '1', '-framerate', String(FPS), '-i', ov, '-filter_complex',
         `[0]scale=-2:${H * 2},crop=${W * 2}:${H * 2}:${Math.round(cx * 2 - W)}:0,zoompan=z='1+0.0009*on':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=${W}x${H}:fps=${FPS}[v];` +
         `[1]format=rgba,fade=in:st=0.25:d=0.5:alpha=1[o];[v][o]overlay=shortest=0[out]`, '-map', '[out]', '-t', String(n / FPS), '-r', String(FPS), '-pix_fmt', 'yuv420p', '-c:v', 'libx264', '-crf', '18', clip);
     } else {
-      await tab.goto(base + '/');
-      await tab.evaluate(() => import('/src/renderer/visualizer.mjs').then(m => { window.v = new m.NeonVisualizer(document.getElementById('c')); window.t = 1000; }));
-      const settings = { style: s.style, palette: s.palette, glow: 24 };
-      const step = (i) => tab.evaluate(([fr, settings]) => { window.t += 1000 / 30; window.v.draw({ mode: 'local', ...fr, settings }, window.t); }, [spectrum[i], settings]);
-      for (let i = Math.max(0, lead + at - 90); i < lead + at; i++) await step(i);
-      for (let i = 0; i < n; i++) {
-        await step(lead + at + i);
-        await tab.locator('#c').screenshot({ path: path.join(dir, String(i).padStart(4, '0') + '.jpg'), type: 'jpeg', quality: 92 });
+      if (!done) {
+        await tab.goto(base + '/');
+        await tab.evaluate(() => import('/src/renderer/visualizer.mjs').then(m => { window.v = new m.NeonVisualizer(document.getElementById('c')); window.t = 1000; }));
+        const settings = { style: s.style, palette: s.palette, glow: 24 };
+        const step = (i) => tab.evaluate(([fr, settings]) => { window.t += 1000 / 30; window.v.draw({ mode: 'local', ...fr, settings }, window.t); }, [spectrum[i], settings]);
+        for (let i = Math.max(0, lead + at - 90); i < lead + at; i++) await step(i);
+        for (let i = 0; i < n; i++) {
+          await step(lead + at + i);
+          await tab.locator('#c').screenshot({ path: path.join(dir, String(i).padStart(4, '0') + '.jpg'), type: 'jpeg', quality: 92 });
+        }
       }
-      ff('-framerate', String(FPS), '-i', path.join(dir, '%04d.jpg'), '-i', ov, '-filter_complex',
-        `[1]format=rgba,fade=in:st=0.25:d=0.5:alpha=1[o];[0][o]overlay[out]`, '-map', '[out]', '-r', String(FPS), '-pix_fmt', 'yuv420p', '-c:v', 'libx264', '-crf', '18', clip);
+      ff('-framerate', String(FPS), '-i', path.join(dir, '%04d.jpg'), '-loop', '1', '-framerate', String(FPS), '-i', ov, '-filter_complex',
+        `[1]format=rgba,fade=in:st=0.25:d=0.5:alpha=1[o];[0][o]overlay=shortest=1[out]`, '-map', '[out]', '-r', String(FPS), '-pix_fmt', 'yuv420p', '-c:v', 'libx264', '-crf', '18', clip);
     }
     parts.push(clip); at += n; console.log('scene', s.id, n, 'frames');
   }

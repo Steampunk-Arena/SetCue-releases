@@ -139,3 +139,13 @@ Pop the visualizer out to your second screen and give it something to do. 🖥�
 Your space could use more sizzle. 🔥
 SetCue turns the music on your computer into a DJ set with a light show.
 Free 14-day demo: getsetcue.com
+
+## Reel
+
+### Quote Reel (`out/setcue-quotes-reel.mp4`, 1080×1920, 27 s)
+
+Post as a Reel (also works as a Story). The music is "Joke's on You" from the SetCue demo pack.
+
+Five reasons your playlist deserves a light show. 🎧✨
+SetCue turns the music on your computer into a DJ set with visuals that move to the beat. No subscription.
+Free 14-day demo: getsetcue.com · 15% off for early customers with code 15OFF
