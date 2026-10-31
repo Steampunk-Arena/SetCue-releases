@@ -58,7 +58,7 @@ The source videos are kept out of git because this repository is public. The Set
 | 0:05 | Step 1: open laptop. | The laptop running SetCue |
 | 0:07 | Step 2: press play. | Projector visuals and disco lights |
 | 0:09 | Congratulations. You're a nightclub now. | The packed dance floor |
-| 0:13 | Costumes: optional. Dancing: apparently mandatory. | Dancers |
+| 0:13 | Costumes: optional. Dancing: mandatory. | Dancers |
 | 0:17 | Setup time: less than finding a costume. | Crowd under the disco lights |
 | 0:20 | Free for 14 days. Your party is tonight. You're covered. · getsetcue.com · 15OFF | End card |
 

@@ -32,7 +32,7 @@ const SCENES = [
   { beats: 4, text: 'Step 1:<br><em>open laptop.</em>', size: 120, clip: clip('legion-walkthrough.mp4', 8.0, 9.3) },
   { beats: 4, text: 'Step 2:<br><em>press play.</em>', size: 120, clip: clip('legion-walkthrough.mp4', 4.9, 6.6) },
   { beats: 6, text: 'Congratulations.<br><em>You\'re a nightclub now.</em>', size: 100, clip: clip('legion-walkthrough.mp4', 1.6, 4.9) },
-  { beats: 8, text: 'Costumes: optional.<br><em>Dancing: apparently mandatory.</em>', size: 88, clip: clip('legion-dancers.mp4', 3, 12) },
+  { beats: 8, text: 'Costumes: optional.<br><em>Dancing: mandatory.</em>', size: 88, clip: clip('legion-dancers.mp4', 3, 12) },
   { beats: 5, text: 'Setup time: less than<br><em>finding a costume.</em>', size: 92, clip: clip('legion-dancers.mp4', 16, 19.5) },
   { beats: 7, end: true, clip: clip('legion-wide.mp4', 2, 6, { wide: true, dim: -0.1 }) },
 ];
