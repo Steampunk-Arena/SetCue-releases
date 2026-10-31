@@ -63,7 +63,7 @@ The source videos are kept out of git because this repository is public. The Set
 | 0:09 | Congratulations. You're a nightclub now. | The packed dance floor |
 | 0:13 | Costumes: optional. Dancing: mandatory. | Dancers |
 | 0:17 | Setup time: less than finding a costume. | Crowd under the disco lights |
-| 0:20 | Free for 14 days. Your party is tonight. You're covered. · getsetcue.com · 15OFF | End card |
+| 0:20 | Free for 14 days. Hey, if your party is this weekend, it's an easy choice to make. · getsetcue.com · 15OFF | End card |
 
 ### Captions
 

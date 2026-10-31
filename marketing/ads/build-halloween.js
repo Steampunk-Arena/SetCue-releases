@@ -46,7 +46,7 @@ function overlay(s) {
       <div style="display:flex;justify-content:center;transform:scale(1.5);transform-origin:center top">${logo(56)}</div>
       <div class="mono" style="font-size:34px;color:var(--muted);letter-spacing:0.14em;margin-top:120px">DESKTOP DJ · LIGHTS · VISUALS</div>
       <h1 style="font-size:96px;margin-top:40px;${shadow}">Free for 14 days.</h1>
-      <div style="font-size:44px;color:var(--text);margin-top:24px;${shadow}">Your party is tonight.<br>You're covered. 🎃</div>
+      <div style="font-size:44px;color:var(--text);margin-top:24px;${shadow}">Hey, if your party is this weekend,<br>it's an easy choice to make. 🎃</div>
       <div class="pill" style="display:flex;justify-content:center;width:fit-content;margin:64px auto 0;font-size:44px;padding:26px 50px">getsetcue.com</div>
       <div style="font-size:34px;color:var(--muted);margin-top:34px">Buying? 15% off with code <b style="color:${ORANGE}">15OFF</b></div>
     </div>` : `
