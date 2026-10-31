@@ -49,7 +49,10 @@ The source videos are kept out of git because this repository is public. The Set
 
 ## Halloween: "You're a nightclub now" (`out/setcue-halloween-ad.mp4`)
 
-1080×1920, 24 s. Real footage of a party SetCue ran (Oct 30): an empty hall becomes a dance floor. Music: the "Joke's on You" chorus from the demo pack, cuts on the beat.
+1080×1920. Real footage of a party SetCue ran (Oct 30): an empty hall becomes a dance floor. Cuts land on the beat of a Suno track from the Pugilism radio stations:
+
+- `out/setcue-halloween-ad.mp4`: "Bear Dance" (112 BPM, from 3:48.7), 22 s
+- `out/setcue-halloween-ad-apex-predator.mp4`: "Apex Predator" (129 BPM, from 3:44.8), 20 s, faster cuts
 
 | Time | Text | Footage |
 | --- | --- | --- |
@@ -80,5 +83,6 @@ The source videos are kept out of git because this repository is public. The Set
 Put the party clips in `source/` as `legion-walkthrough.mp4`, `legion-dancers.mp4` and `legion-wide.mp4`, then:
 
 ```sh
-node marketing/ads/build-halloween.js "<path to Joke's on You.mp3>"
+node marketing/ads/build-halloween.js Bear_Dance.mp3 112.3 228.719 setcue-halloween-ad.mp4
+node marketing/ads/build-halloween.js Apex_Predator.mp3 129.2 224.791 setcue-halloween-ad-apex-predator.mp4
 ```

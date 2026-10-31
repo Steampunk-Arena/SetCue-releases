@@ -1,6 +1,7 @@
 // Builds the Halloween "you're a nightclub now" ad (1080×1920, ~24 s) from footage of a party SetCue ran,
 // cut on the beat of a demo-pack song.
-// Usage: node marketing/ads/build-halloween.js <song.mp3>
+// Usage: node marketing/ads/build-halloween.js <song.mp3> <bpm> <start seconds, on a downbeat> [output name]
+// e.g.   node marketing/ads/build-halloween.js Bear_Dance.mp3 112.3 228.73 setcue-halloween-ad.mp4
 // Expects in source/ (kept out of git): legion-walkthrough.mp4 (empty hall → dance floor → screen → laptop, 9 s),
 // legion-dancers.mp4 (dance floor, 22 s) and legion-wide.mp4 (wide shot with disco lights, 12 s).
 const path = require('path');
@@ -9,13 +10,13 @@ const { execFileSync } = require('child_process');
 const { chromium } = require('playwright');
 const { logo, page } = require('../instagram/render.js');
 
-const SONG = process.argv[2];
+const [SONG, BPM, START, NAME = 'setcue-halloween-ad.mp4'] = process.argv.slice(2);
 const W = 1080, H = 1920, FPS = 30;
-const BEAT = 60 / 105;                 // "Joke's on You" runs at 105 BPM
-const SONG_START = 45.5;               // the chorus
+const BEAT = 60 / Number(BPM);
+const SONG_START = Number(START);
 const SRC = path.join(__dirname, 'source');
-const WORK = path.join(__dirname, 'work', 'halloween');
-const OUT = path.join(__dirname, 'out', 'setcue-halloween-ad.mp4');
+const WORK = path.join(__dirname, 'work', NAME.replace(/\.mp4$/, ''));
+const OUT = path.join(__dirname, 'out', NAME);
 fs.mkdirSync(WORK, { recursive: true });
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
 
