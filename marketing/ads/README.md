@@ -46,3 +46,39 @@ node marketing/ads/build-ad.js "<path to Iron & Sweat.mp3>"
 ```
 
 The source videos are kept out of git because this repository is public. The SetCue screens come from `../facebook/source/`.
+
+## Halloween: "You're a nightclub now" (`out/setcue-halloween-ad.mp4`)
+
+1080×1920, 24 s. Real footage of a party SetCue ran (Oct 30): an empty hall becomes a dance floor. Music: the "Joke's on You" chorus from the demo pack, cuts on the beat.
+
+| Time | Text | Footage |
+| --- | --- | --- |
+| 0:00 | Halloween party tonight? | The empty hall |
+| 0:02 | Current vibe: waiting room. | Same, frozen, slow push-in |
+| 0:05 | Step 1: open laptop. | The laptop running SetCue |
+| 0:07 | Step 2: press play. | Projector visuals and disco lights |
+| 0:09 | Congratulations. You're a nightclub now. | The packed dance floor |
+| 0:13 | Costumes: optional. Dancing: apparently mandatory. | Dancers |
+| 0:17 | Setup time: less than finding a costume. | Crowd under the disco lights |
+| 0:20 | Free for 14 days. Your party is tonight. You're covered. · getsetcue.com · 15OFF | End card |
+
+### Captions
+
+**TikTok / Reels**
+
+> POV: it's Halloween, the party is tonight, and the venue looks like a dentist's waiting room 🎃 laptop open → press play → nightclub. free 14-day demo, so tonight's party is on us 👻 #halloweenparty #djsetup #partyideas #lastminutehalloween #partylights
+
+**Facebook / Meta ad**
+
+> Halloween party tonight and the room looks like a waiting room? 🎃
+> Open your laptop, press play, and SetCue turns it into a nightclub: music that mixes itself, visuals on the big screen, and lights that move to the beat.
+> Free for 14 days, so tonight's party is covered. 15% off with code 15OFF when you buy. 👻
+> getsetcue.com
+
+### Rebuilding
+
+Put the party clips in `source/` as `legion-walkthrough.mp4`, `legion-dancers.mp4` and `legion-wide.mp4`, then:
+
+```sh
+node marketing/ads/build-halloween.js "<path to Joke's on You.mp3>"
+```
