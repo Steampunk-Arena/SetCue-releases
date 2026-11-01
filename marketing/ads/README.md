@@ -86,3 +86,33 @@ Put the party clips in `source/` as `legion-walkthrough.mp4`, `legion-dancers.mp
 node marketing/ads/build-halloween.js Bear_Dance.mp3 112.3 228.719 setcue-halloween-ad.mp4
 node marketing/ads/build-halloween.js Apex_Predator.mp3 129.2 224.791 setcue-halloween-ad-apex-predator.mp4
 ```
+
+## "How many monitors is too many monitors? Answer? Yes."
+
+- `out/setcue-monitors-ad.mp4`: Reel, 1080×1920, 27 s. Music: "Break Through the Wire" (Suno, 123 BPM, from 4:09.9).
+- `out/setcue-monitors-post.png`: feed post, 1080×1350.
+
+A monitor wall fills up on the beat: the main monitor runs the SetCue app with its docked visualizer, and every extra screen shows the same live visualizer (as the app's pop-out windows do), changing pattern together every two bars. The visuals are SetCue's own renderer, driven by the song.
+
+| Time | Text |
+| --- | --- |
+| 0:00 | How many monitors is too many monitors? (screens pop in from 0:04) |
+| 0:12 | Answer? |
+| 0:14 | Yes. · One app. Every screen. |
+| 0:21 | Pop the visualizer out to every screen you own. · getsetcue.com · Free 14-day demo · 15OFF |
+
+### Captions
+
+**Facebook / Instagram**
+
+> How many monitors is too many monitors? 🖥️🖥️🖥️
+> Answer? Yes.
+> SetCue runs your music on one screen and pops the visualizer out to every other screen you own, all moving to the beat. Free 14-day demo. 15% off with code 15OFF.
+> getsetcue.com
+> #desksetup #battlestation #multimonitor #setupwars #musicvisualizer
+
+### Rebuilding
+
+```sh
+node marketing/ads/build-monitors.js <SetCue app repo> source/break-through-the-wire.mp3 123 249.942
+```
