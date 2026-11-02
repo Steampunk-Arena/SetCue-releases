@@ -1,6 +1,7 @@
 // Builds the "How many monitors is too many monitors? Answer? Yes." Reel (1080×1920) and feed post (1080×1350).
 // Screens pop onto a wall on the beat; every extra screen shows the same live SetCue visualizer (as the app's
-// pop-out windows do), and the main monitor shows the app with its docked visualizer running.
+// pop-out windows do), then on "one giant screen" the visualizer spans the whole wall as one picture, placed by
+// each monitor's position like a video wall. The main monitor shows the app with its docked visualizer running.
 // Usage: node marketing/ads/build-monitors.js <SetCue app repo> <song.mp3> <bpm> <start seconds, on a downbeat>
 // e.g.   node marketing/ads/build-monitors.js ../setcue source/break-through-the-wire.mp3 123 249.942
 const path = require('path');
@@ -13,7 +14,8 @@ const { logo, page } = require('../instagram/render.js');
 const [APP, SONG, BPM, START] = process.argv.slice(2);
 const W = 1080, H = 1920, FPS = 30;
 const BEAT = 60 / Number(BPM);
-const BEATS = 56;
+const BEATS = 60;
+const SPAN_AT = 36;                    // the beat the wall becomes one spanned picture
 const T = b => +(b * BEAT).toFixed(3);
 const TOTAL = T(BEATS);
 const WORK = path.join(__dirname, 'work', 'monitors');
@@ -39,6 +41,13 @@ const SCREENS = [
   { r: [850, 1030, 190, 338], at: 22, portrait: true },
   { r: [120, 1318, 150, 85], at: 24, tablet: true },
 ];
+// The spanned picture covers every screen but the main one, positioned by where each screen sits.
+const SPAN = (() => {
+  const r = SCREENS.filter(s => !s.main).map(s => s.r);
+  const x = Math.min(...r.map(a => a[0])), y = Math.min(...r.map(a => a[1]));
+  const w = Math.max(...r.map(a => a[0] + a[2])) - x, h = Math.max(...r.map(a => a[1] + a[3])) - y;
+  return { x, y, w: w + (w % 2), h: h + (h % 2) };
+})();
 
 // ---- Static layers (transparent PNGs unless noted) ----
 const transparent = html => page(W, H, html)
@@ -71,13 +80,15 @@ const shadow = 'text-shadow:0 4px 30px rgba(0,0,0,.8)';
 const TEXTS = [
   { from: 0, to: 24, html: text(`<h1 style="font-size:96px;${shadow}">How many monitors is <em>too many</em> monitors?</h1>`, 150) },
   { from: 24, to: 28, html: text(`<h1 style="font-size:150px;${shadow}">Answer?</h1>`, 250) },
-  { from: 28, to: 44, html: text(`<h1 style="font-size:230px;${shadow}"><em>Yes.</em></h1>`, 170) },
-  { from: 32, to: 44, html: text(`<div style="font-size:44px;font-weight:700;${shadow}">One app. Every screen.</div>`, 1560) },
-  { from: 44, to: BEATS, end: true, html: page(W, H, `
+  { from: 28, to: SPAN_AT, html: text(`<h1 style="font-size:230px;${shadow}"><em>Yes.</em></h1>`, 170) },
+  { from: 30, to: SPAN_AT, html: text(`<div style="font-size:44px;font-weight:700;${shadow}">One app. Every screen.</div>`, 1560) },
+  { from: SPAN_AT, to: 48, html: text(`<h1 style="font-size:96px;${shadow}">And now they're <em>one giant screen.</em></h1>`, 150) },
+  { from: SPAN_AT + 4, to: 48, html: text(`<div style="font-size:44px;font-weight:700;${shadow}">Span the visualizer across every monitor.</div>`, 1560) },
+  { from: 48, to: BEATS, end: true, html: page(W, H, `
     <div style="position:absolute;inset:0;background:rgba(11,5,18,.78)"></div>
     <div style="position:absolute;left:90px;right:90px;top:520px;text-align:center">
       <div style="display:flex;justify-content:center;transform:scale(1.5);transform-origin:center top">${logo(56)}</div>
-      <h1 style="font-size:84px;margin-top:140px;${shadow}">Pop the visualizer out to <em>every screen</em> you own.</h1>
+      <h1 style="font-size:84px;margin-top:140px;${shadow}"><em>Span</em> the visualizer across every screen you own.</h1>
       <div class="pill" style="display:flex;justify-content:center;width:fit-content;margin:70px auto 0;font-size:44px;padding:26px 50px">getsetcue.com</div>
       <div style="font-size:34px;color:var(--muted);margin-top:34px">Free 14-day demo · 15% off with code <b style="color:var(--text)">15OFF</b></div>
     </div>`).replace('class="canvas" style="width', 'class="canvas" style="background:transparent;width').replace('</head>', '<style>body{background:transparent}</style></head>') },
@@ -124,7 +135,7 @@ function serve() {
   }, { n: frames + lead, FPS });
 
   // The visualizer in landscape and portrait, both cycling the same looks at the same moments.
-  for (const [name, vw, vh] of [['land', 960, 540], ['port', 540, 960]]) {
+  for (const [name, vw, vh] of [['land', 960, 540], ['port', 540, 960], ['span', SPAN.w, SPAN.h]]) {
     const dir = path.join(WORK, name), done = fs.existsSync(dir) && fs.readdirSync(dir).length === frames;
     if (!done) {
       fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir);
@@ -160,19 +171,23 @@ function serve() {
   const inputs = ['-loop', '1', '-framerate', String(FPS), '-i', path.join(WORK, 'room.png'),
     '-i', path.join(WORK, 'land.mp4'), '-i', path.join(WORK, 'port.mp4'), '-loop', '1', '-framerate', String(FPS), '-i', APP_SHOT];
   SCREENS.forEach((s, i) => inputs.push('-loop', '1', '-framerate', String(FPS), '-i', path.join(WORK, `monitor-${i}.png`)));
+  inputs.push('-i', path.join(WORK, 'span.mp4'));
+  const spans = SCREENS.length - 1, spanIn = 4 + SCREENS.length, spanStart = T(SPAN_AT);
   const lands = SCREENS.filter(s => !s.portrait).length, ports = SCREENS.filter(s => s.portrait).length;
-  let g = `[1:v]split=${lands}${Array.from({ length: lands }, (_, i) => `[l${i}]`).join('')};[2:v]split=${ports}${Array.from({ length: ports }, (_, i) => `[p${i}]`).join('')};`;
+  let g = `[${spanIn}:v]split=${spans}${Array.from({ length: spans }, (_, i) => `[q${i}]`).join('')};[1:v]split=${lands}${Array.from({ length: lands }, (_, i) => `[l${i}]`).join('')};[2:v]split=${ports}${Array.from({ length: ports }, (_, i) => `[p${i}]`).join('')};`;
   // Main monitor: the app screenshot with the live visualizer in its docked visualizer area.
   const [mx, my, mw, mh] = SCREENS[0].r, k = mw / 3200;
   g += `[3:v]crop=3200:1800:0:0,scale=${mw}:${mh}[app];[l0]crop=960:301:0:120,scale=${Math.round(3128 * k)}:${Math.round(974 * k)}[dock];` +
     `[app][dock]overlay=${Math.round(36 * k)}:${Math.round(112 * k)}[mainscreen];`;
-  let last = '[0:v]', li = 1, pi = 0;
+  let last = '[0:v]', li = 1, pi = 0, qi = 0;
   SCREENS.forEach((s, i) => {
     const [x, y, w, h] = s.r, start = T(s.at);
     g += `[${4 + i}:v]format=rgba,fade=in:st=${start}:d=0.12:alpha=1[m${i}];${last}[m${i}]overlay=0:0[b${i}];`;
     const src = s.main ? '[mainscreen]' : s.portrait ? `[p${pi++}]` : `[l${li++}]`;
-    g += `${src}scale=${w}:${h},format=rgba,fade=in:st=${start}:d=0.12:alpha=1[s${i}];[b${i}][s${i}]overlay=${x}:${y}[c${i}];`;
-    last = `[c${i}]`;
+    g += `${src}scale=${w}:${h},format=rgba,fade=in:st=${start}:d=0.12:alpha=1[s${i}];[b${i}][s${i}]overlay=${x}:${y}${s.main ? '' : `:enable='lt(t,${spanStart})'`}[c${i}];`;
+    // From the span beat on, each extra screen shows its own slice of the one spanned picture.
+    if (!s.main) g += `[q${qi++}]crop=${w}:${h}:${x - SPAN.x}:${y - SPAN.y}[z${i}];[c${i}][z${i}]overlay=${x}:${y}:enable='gte(t,${spanStart})'[d${i}];`;
+    last = s.main ? `[c${i}]` : `[d${i}]`;
   });
   g += `${last}format=yuv420p[out]`;
   ff(...inputs, '-filter_complex', g, '-map', '[out]', '-t', String(TOTAL), '-r', String(FPS), '-c:v', 'libx264', '-crf', '17', path.join(WORK, 'clean.mp4'));
@@ -192,7 +207,7 @@ function serve() {
 
   // Feed post: a clean frame with every screen lit, cropped to 4:5, with the joke on top.
   const still = path.join(WORK, 'still.png');
-  ff('-ss', String(T(38)), '-i', path.join(WORK, 'clean.mp4'), '-frames:v', '1', still);
+  ff('-ss', String(T(SPAN_AT + 6)), '-i', path.join(WORK, 'clean.mp4'), '-frames:v', '1', still);
   const img = 'data:image/png;base64,' + fs.readFileSync(still).toString('base64');
   const b = await chromium.launch(), p = await b.newPage({ viewport: { width: 1080, height: 1350 } });
   await p.setContent(page(1080, 1350, `
@@ -203,6 +218,7 @@ function serve() {
     </div>
     <div style="position:absolute;left:70px;right:70px;bottom:120px;text-align:center">
       <h1 style="font-size:96px;${shadow}">Answer? <em>Yes.</em></h1>
+      <div style="font-size:34px;font-weight:700;margin-top:14px;${shadow}">Now span them into one giant screen.</div>
     </div>
     <div style="position:absolute;left:72px;right:72px;bottom:44px;display:flex;justify-content:space-between;align-items:center">
       ${logo(32)}<div class="mono" style="font-size:24px;color:var(--muted)">getsetcue.com · free 14-day demo</div>
