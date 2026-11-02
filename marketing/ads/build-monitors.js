@@ -25,8 +25,10 @@ fs.mkdirSync(WORK, { recursive: true });
 const ff = (...args) => execFileSync('ffmpeg', ['-v', 'error', '-y', ...args], { stdio: 'inherit' });
 
 // The visualizer cycles through released patterns every two bars, on every screen at once.
+// The spanned stretch (beats 36-52) uses Hexagon Tunnel and Prism Kaleidoscope, which fill the whole frame, so
+// the wall reads as one picture; scenes with a dark sky would leave the top screens nearly black.
 const LOOKS = [['neon-gateway', 'sunset'], ['hyperspace', 'midnight-cyan'], ['plasma-helix', 'neon'], ['holo-terrain', 'ice'],
-  ['car-grid', 'ultraviolet'], ['laser-grid', 'neon'], ['solar-flare', 'fire']];
+  ['tunnel', 'neon'], ['prism', 'ultraviolet'], ['solar-flare', 'fire'], ['solar-flare', 'fire']];
 
 // Screens [x, y, w, h] and the beat each one appears on. The first is the main monitor with the app.
 const SCREENS = [
