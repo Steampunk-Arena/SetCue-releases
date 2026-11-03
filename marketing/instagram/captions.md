@@ -6,7 +6,7 @@ Store link for the bio: https://steampunkarena.gumroad.com/l/setcue
 
 > Your music. Your vibes. Let's go. 🎧
 >
-> SetCue is a desktop DJ player for the music files you already own. Two decks, tempo-matched auto fades, a built-in visualizer and a headphone cue, on Windows, macOS and Linux.
+> SetCue is a desktop DJ player for the music files you already own. Two decks, timed auto fades, tempo walks to any BPM, a built-in visualizer and a headphone cue, on Windows, macOS and Linux.
 >
 > Every download is a free 14-day demo with all features unlocked. Link in bio.
 >
@@ -20,7 +20,7 @@ Store link for the bio: https://steampunkarena.gumroad.com/l/setcue
 >
 > 01 Your music, your vibes
 > 02 Two decks: now playing and on deck
-> 03 Tempo-matched auto fades
+> 03 Tempo walks: glide to any BPM
 > 04 Built-in visualizer and lyrics
 > 05 Build sets and record the mix
 > 06 Speakers out, cue in your headphones

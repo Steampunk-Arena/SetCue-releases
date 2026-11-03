@@ -45,7 +45,7 @@ function coverApp() {
 // ---------- Cover 3: feature grid (1280×720) ----------
 const FEATURES = [
   ['Two decks', 'Now playing + on deck, headphone cue on a separate output'],
-  ['Auto DJ', 'Tempo-matched auto fades into the next track'],
+  ['Auto DJ', 'Timed auto fades into the next track; tempo walks to any BPM'],
   ['Visualizer', '20+ patterns and palettes, lyrics, pop-out second screen'],
   ['Set builder', 'BPM and total set time at a glance; import & export sets'],
   ['Record', 'Record your mix to WAV'],

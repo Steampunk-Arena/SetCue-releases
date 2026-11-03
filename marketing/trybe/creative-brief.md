@@ -6,7 +6,7 @@
 
 SetCue is a desktop DJ app for the music already on your computer: your MP3s, Bandcamp purchases, CD rips and downloaded Suno songs. No streaming account, no subscription, no DJ gear needed.
 
-- **Two decks and Auto DJ:** SetCue matches tempos and fades from one song into the next on its own, or you mix by hand with the crossfader.
+- **Two decks and Auto DJ:** SetCue fades from one song into the next on a timer you set, or you mix by hand with the crossfader. Tempo walks glide each deck to any BPM.
 - **A visualizer for a second screen:** 20+ animated scenes (neon cities, hyperspace, wireframe canyons) in color palettes you choose. Pop it out to a TV or projector.
 - **Lyrics on screen:** timed lyrics and song titles over the visuals, karaoke style.
 - **Music videos:** mix MP4, WebM and MOV videos; the crossfader blends the pictures too. *(Windows)*

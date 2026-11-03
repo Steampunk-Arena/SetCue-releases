@@ -27,7 +27,7 @@ SetCue — Desktop DJ for Your Own Music
 
 ### Your music. Your vibes. Let's go.
 
-SetCue turns the music already on your computer into a live DJ set. Load two decks, let SetCue match tempos and fade between tracks, and put on a light show while you play — no streaming account, no subscription, no club gear required.
+SetCue turns the music already on your computer into a live DJ set. Load two decks, let SetCue fade between tracks, walk each deck to any tempo, and put on a light show while you play — no streaming account, no subscription, no club gear required.
 
 **Try it free first:** every download is the full app with unlimited playback for 14 days. Buy a licence key here when you're ready to keep playing.
 
@@ -36,7 +36,8 @@ SetCue turns the music already on your computer into a live DJ set. Load two dec
 ### Mix like a DJ
 
 - **Two decks** — Now Playing and On Deck, each with its own level and headphone cue.
-- **Auto DJ** — tempo-matched auto fades walk the beat from one track into the next. Set the fade length, hit go.
+- **Auto DJ** — timed auto fades blend from one track into the next. Set the fade length, hit go.
+- **Tempo walks** — set a target BPM and glide each deck to it.
 - **Headphone cue on a separate output** — main mix to your speakers, preview the next track in your headphones.
 - **Record your mix** to WAV and share it.
 

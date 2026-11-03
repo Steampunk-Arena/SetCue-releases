@@ -199,10 +199,10 @@ const FEATURES = [
   },
   {
     file: 'carousel-03-tempo.png',
-    kicker: 'Auto DJ',
-    title: 'Tempo-matched<br><em>auto fades.</em>',
-    body: 'Set a target BPM, pick a fade length, and let SetCue walk the tempo and crossfade into the next track.',
-    crop: { x: 28, y: 632, w: 978, h: 242 },
+    kicker: 'Tempo',
+    title: 'Walk to<br><em>any tempo.</em>',
+    body: 'Set a target BPM and glide to it with Walk. Auto DJ fades on your timer.',
+    crop: { x: 28, y: 632, w: 690, h: 242 },
   },
   {
     file: 'carousel-04-visualizer.png',

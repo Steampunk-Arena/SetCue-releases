@@ -11,9 +11,9 @@ const APP = 'data:image/jpeg;base64,' + fs.readFileSync(path.join(__dirname, '..
 // Features marked `win` are in the Windows version now and coming to Mac and Linux.
 const GROUPS = [
   { icon: '🎧', title: 'Mix like a DJ', color: 'var(--pink)', items: [
-    ['Two decks + Auto DJ', 'tempo-matched fades'],
-    ['Match BPM', 'tempo control per deck'],
-    ['Headphone cue', 'preview the next track'],
+    ['Two decks + Auto DJ', 'timed auto-fades'],
+    ['Tempo walks', 'glide to any BPM'],
+    ['6-band EQ', 'per deck, in your recording', 'new'],
     ['Record your mix', 'save it as a WAV'],
   ] },
   { icon: '✨', title: 'Put on a show', color: 'var(--cyan)', items: [
@@ -26,7 +26,7 @@ const GROUPS = [
     ['DJ lights', 'DMX-512, on the beat', 'win'],
     ['MIDI controllers', 'map with MIDI learn', 'win'],
     ['Scratching', 'jog wheel or mouse', 'win'],
-    ['Keyboard controls', 'play, patterns, palettes'],
+    ['Headphone cue', 'preview the next track'],
   ] },
   { icon: '💾', title: 'Your music', color: '#b98cff', items: [
     ['Plays your files', 'MP3, WAV, FLAC and more'],
@@ -93,7 +93,7 @@ function landscape() {
       <h1 style="font-size:84px;margin-top:30px">Everything <em>SetCue</em> does.</h1>
       <div style="font-size:28px;line-height:1.35;color:var(--muted);margin-top:16px;max-width:900px">Upgrade your space with an offline desktop DJ app that plays both Music and Videos. Available for PC, Mac and Linux Users.</div>
     </div>
-    ${appShot({ x: 0, y: 0, w: 3200, h: 2000 }, 80, 400, 860)}
+    ${appShot({ x: 0, y: 0, w: 3200, h: 1480 }, 80, 440, 860)}
     ${grid(GROUPS, 24, 'left:1010px;right:76px;top:70px')}
     <div style="position:absolute;left:80px;bottom:56px;font-size:19px;color:var(--muted)">${legend(14)}</div>
     <div class="pill" style="position:absolute;right:76px;bottom:44px;font-size:28px;padding:16px 30px">Free 14-day demo · getsetcue.com</div>
