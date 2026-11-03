@@ -12,3 +12,14 @@ Features tagged WINDOWS are in the Windows version now and coming to Mac and Lin
 ```sh
 node marketing/features/render.js
 ```
+
+## Animated version
+
+- `out/setcue-features.gif`: 540×675, loops, 5.3 s (eight beats). For websites, email, Gumroad and anywhere that plays GIFs.
+- `out/setcue-features.mp4`: 1080×1350 with the song. For Facebook and Instagram, which play MP4s better than GIFs.
+
+The top window's visualizer plays Neon Gateway (Ultraviolet palette) to "Outrunning Ghosts" from the demo pack, with its timed lyrics, and the window's glow pulses on each bass hit. Run `render.js` first, then:
+
+```sh
+node marketing/features/animate.js <SetCue app repo> "<Outrunning Ghosts.mp3>" "<Outrunning Ghosts.lrc>"
+```
