@@ -74,9 +74,9 @@ function portrait() {
     <div style="position:absolute;left:72px;right:72px;top:54px;display:flex;justify-content:space-between;align-items:center">
       <h1 style="font-size:60px">Everything <em>SetCue</em> does.</h1>${logo(28)}
     </div>
-    <div style="position:absolute;left:72px;top:132px;font-size:26px;color:var(--muted)">The desktop DJ for the music already on your computer.</div>
-    ${appShot({ x: 0, y: 0, w: 3200, h: 1000 }, 72, 190, 936)}
-    ${grid(GROUPS, 21, 'left:72px;right:72px;top:500px')}
+    <div style="position:absolute;left:72px;right:72px;top:128px;font-size:25px;line-height:1.35;color:var(--muted)">Upgrade your space with an offline desktop DJ app that plays both Music and Videos. Available for PC, Mac and Linux Users.</div>
+    ${appShot({ x: 0, y: 0, w: 3200, h: 1000 }, 72, 218, 936)}
+    ${grid(GROUPS, 21, 'left:72px;right:72px;top:526px')}
     <div style="position:absolute;left:72px;right:72px;bottom:44px;display:flex;justify-content:space-between;align-items:center">
       <div style="font-size:17px;color:var(--muted);max-width:440px;line-height:1.5">${legend(12)}</div>
       <div class="pill" style="font-size:22px;padding:14px 24px;white-space:nowrap">Free 14-day demo · getsetcue.com</div>
@@ -91,7 +91,7 @@ function landscape() {
     <div style="position:absolute;left:80px;top:70px">
       ${logo(36)}
       <h1 style="font-size:84px;margin-top:30px">Everything <em>SetCue</em> does.</h1>
-      <div style="font-size:30px;color:var(--muted);margin-top:16px">The desktop DJ for the music already on your computer.</div>
+      <div style="font-size:28px;line-height:1.35;color:var(--muted);margin-top:16px;max-width:900px">Upgrade your space with an offline desktop DJ app that plays both Music and Videos. Available for PC, Mac and Linux Users.</div>
     </div>
     ${appShot({ x: 0, y: 0, w: 3200, h: 2000 }, 80, 400, 860)}
     ${grid(GROUPS, 24, 'left:1010px;right:76px;top:70px')}
