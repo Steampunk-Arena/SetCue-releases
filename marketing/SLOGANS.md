@@ -4,6 +4,7 @@
 
 - **Your music. Your vibes. Let's go.** (primary tagline: Instagram, Gumroad, Facebook cover, ad end cards)
 - **A control center for your senses.**
+- **Enhance your Vibe.**
 - Upgrade your space with an offline desktop DJ app that plays both Music and Videos. Available for PC, Mac and Linux Users. (feature graphic)
 - Your space could use more sizzle.
 - Your music. A light show.
