@@ -8,6 +8,8 @@ const { logo, page, renderJobs } = require('../instagram/render.js');
 const OUT = path.join(__dirname, 'out');
 const APP = 'data:image/jpeg;base64,' + fs.readFileSync(path.join(__dirname, '..', 'facebook', 'source', 'lyrics.jpg')).toString('base64');
 
+const SUBTITLE = 'Upgrade your space with an offline desktop DJ app that plays both Music and Videos. Available for PC, Mac and Linux Users.';
+
 // Features marked `win` are in the Windows version now and coming to Mac and Linux.
 const GROUPS = [
   { icon: '🎧', title: 'Mix like a DJ', color: 'var(--pink)', items: [
@@ -47,16 +49,17 @@ const CSS = `
   .tag.new { color:var(--ink); background:var(--cyan); }
 `;
 
-function card({ icon, title, color, items }, size) {
+// `inline` puts each feature's detail on the same line, for the square layout.
+function card({ icon, title, color, items }, size, inline = false) {
   return `<div class="card">
     <h2 style="font-size:${size * 1.4}px;color:${color}"><span>${icon}</span>${title}</h2>
     <div style="display:flex;flex-direction:column;gap:${size * 0.5}px;margin-top:${size * 0.7}px">${items.map(([name, what, tag]) => `
       <div style="font-size:${size}px;line-height:1.25"><b>${name}</b>${tag ? `<span class="tag ${tag}">${tag === 'win' ? 'WINDOWS' : 'NEW'}</span>` : ''}
-        <div style="color:var(--muted);font-size:0.84em;margin-top:2px">${what}</div></div>`).join('')}
+        ${inline ? `<span style="color:var(--muted);font-size:0.86em"> · ${what}</span>` : `<div style="color:var(--muted);font-size:0.84em;margin-top:2px">${what}</div>`}</div>`).join('')}
     </div>
   </div>`;
 }
-const grid = (groups, size, style) => `<div style="position:absolute;display:grid;grid-template-columns:1fr 1fr;gap:22px;${style}">${groups.map(g => card(g, size)).join('')}</div>`;
+const grid = (groups, size, style, inline = false) => `<div style="position:absolute;display:grid;grid-template-columns:1fr 1fr;gap:20px;${style}">${groups.map(g => card(g, size, inline)).join('')}</div>`;
 
 // The app screenshot as a glowing screen; `crop` is in the 3200×2000 screenshot.
 function appShot({ x, y, w, h }, left, top, width) {
@@ -74,7 +77,7 @@ function portrait() {
     <div style="position:absolute;left:72px;right:72px;top:54px;display:flex;justify-content:space-between;align-items:center">
       <h1 style="font-size:60px">Everything <em>SetCue</em> does.</h1>${logo(28)}
     </div>
-    <div style="position:absolute;left:72px;right:72px;top:128px;font-size:25px;line-height:1.35;color:var(--muted)">Upgrade your space with an offline desktop DJ app that plays both Music and Videos. Available for PC, Mac and Linux Users.</div>
+    <div style="position:absolute;left:72px;right:72px;top:128px;font-size:25px;line-height:1.35;color:var(--muted)">${SUBTITLE}</div>
     ${appShot({ x: 0, y: 0, w: 3200, h: 1000 }, 72, 218, 936)}
     ${grid(GROUPS, 21, 'left:72px;right:72px;top:526px')}
     <div style="position:absolute;left:72px;right:72px;bottom:44px;display:flex;justify-content:space-between;align-items:center">
@@ -91,7 +94,7 @@ function landscape() {
     <div style="position:absolute;left:80px;top:70px">
       ${logo(36)}
       <h1 style="font-size:84px;margin-top:30px">Everything <em>SetCue</em> does.</h1>
-      <div style="font-size:28px;line-height:1.35;color:var(--muted);margin-top:16px;max-width:900px">Upgrade your space with an offline desktop DJ app that plays both Music and Videos. Available for PC, Mac and Linux Users.</div>
+      <div style="font-size:28px;line-height:1.35;color:var(--muted);margin-top:16px;max-width:900px">${SUBTITLE}</div>
     </div>
     ${appShot({ x: 0, y: 0, w: 3200, h: 1480 }, 80, 440, 860)}
     ${grid(GROUPS, 24, 'left:1010px;right:76px;top:70px')}
@@ -100,7 +103,25 @@ function landscape() {
   `);
 }
 
+function square() {
+  const W = 1080, H = 1080;
+  return page(W, H, `<style>${CSS}</style>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 40% at 50% 28%, rgba(123,77,255,0.5), transparent 70%)"></div>
+    <div style="position:absolute;left:72px;right:72px;top:44px;display:flex;justify-content:space-between;align-items:center">
+      <h1 style="font-size:56px">Everything <em>SetCue</em> does.</h1>${logo(26)}
+    </div>
+    <div style="position:absolute;left:72px;right:72px;top:116px;font-size:21px;line-height:1.35;color:var(--muted)">${SUBTITLE}</div>
+    ${appShot({ x: 0, y: 0, w: 3200, h: 1000 }, 72, 196, 936)}
+    ${grid(GROUPS, 17, 'left:72px;right:72px;top:510px', true)}
+    <div style="position:absolute;left:72px;right:72px;bottom:36px;display:flex;justify-content:space-between;align-items:center">
+      <div style="font-size:15px;color:var(--muted)">${legend(11)}</div>
+      <div class="pill" style="font-size:21px;padding:12px 22px;white-space:nowrap">Free 14-day demo · getsetcue.com</div>
+    </div>
+  `);
+}
+
 renderJobs([
+  ['setcue-features-1080x1080.png', 1080, 1080, square()],
   ['setcue-features-1080x1350.png', 1080, 1350, portrait()],
   ['setcue-features-1920x1080.png', 1920, 1080, landscape()],
 ], OUT);

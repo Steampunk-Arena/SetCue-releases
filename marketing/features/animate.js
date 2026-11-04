@@ -1,7 +1,8 @@
 // Animates the portrait feature graphic: the visualizer in the top window plays Neon Gateway to a demo song with
 // its timed lyrics, and the window's glow pulses on the beat. Writes out/setcue-features.gif (540×675, loops)
-// and out/setcue-features.mp4 (1080×1350, with the song).
-// Usage: node marketing/features/animate.js <SetCue app repo> <Outrunning Ghosts.mp3> <Outrunning Ghosts.lrc>
+// and out/setcue-features.mp4 (1080×1350, with the song); with `square`, out/setcue-features-square.gif (540×540)
+// and .mp4 (1080×1080).
+// Usage: node marketing/features/animate.js <SetCue app repo> <Outrunning Ghosts.mp3> <Outrunning Ghosts.lrc> [square]
 // Run render.js first; this animates its out/setcue-features-1080x1350.png.
 const path = require('path');
 const fs = require('fs');
@@ -9,16 +10,21 @@ const http = require('http');
 const { execFileSync } = require('child_process');
 const { chromium } = require('playwright');
 
-const [APP, SONG, LRC] = process.argv.slice(2);
-const W = 1080, H = 1350, FPS = 20;
+const [APP, SONG, LRC, LAYOUT = 'portrait'] = process.argv.slice(2);
+// The top window and its visualizer area in each layout of the graphic.
+const LAYOUTS = {
+  portrait: { H: 1350, top: 218, base: 'setcue-features-1080x1350.png', name: 'setcue-features' },
+  square: { H: 1080, top: 196, base: 'setcue-features-1080x1080.png', name: 'setcue-features-square' },
+};
+const L = LAYOUTS[LAYOUT];
+const W = 1080, H = L.H, FPS = 20;
 const BPM = 90, BEATS = 8, START = 57.0;          // eight beats from "Every second counts when you're racing with the clock"
 const DUR = BEATS * 60 / BPM;
 const OUT = path.join(__dirname, 'out');
-const WORK = path.join(__dirname, 'work');
-const BASE = path.join(OUT, 'setcue-features-1080x1350.png');
-// The top window and its visualizer area in the portrait graphic.
-const CARD = { x: 72, y: 218, w: 936, h: 292 };
-const VIS = { x: 85, y: 282, w: 914, h: 285 };
+const WORK = path.join(__dirname, 'work', LAYOUT);
+const BASE = path.join(OUT, L.base);
+const CARD = { x: 72, y: L.top, w: 936, h: 292 };
+const VIS = { x: 85, y: L.top + 64, w: 914, h: 285 };
 fs.mkdirSync(path.join(WORK, 'frames'), { recursive: true });
 const ff = (...args) => execFileSync('ffmpeg', ['-v', 'error', '-y', ...args], { stdio: 'inherit' });
 
@@ -101,9 +107,9 @@ function serve() {
   const seq = path.join(WORK, 'frames', '%04d.png');
   ff('-framerate', String(FPS), '-i', seq, '-ss', String(START), '-i', SONG, '-map', '0:v', '-map', '1:a',
     '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k',
-    '-af', `afade=in:d=0.2,afade=out:st=${(DUR - 0.6).toFixed(2)}:d=0.6`, '-t', DUR.toFixed(2), '-movflags', '+faststart', path.join(OUT, 'setcue-features.mp4'));
+    '-af', `afade=in:d=0.2,afade=out:st=${(DUR - 0.6).toFixed(2)}:d=0.6`, '-t', DUR.toFixed(2), '-movflags', '+faststart', path.join(OUT, `${L.name}.mp4`));
   ff('-framerate', String(FPS), '-i', seq, '-filter_complex',
     '[0]scale=540:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=192:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=4:diff_mode=rectangle',
-    '-loop', '0', path.join(OUT, 'setcue-features.gif'));
-  console.log('wrote setcue-features.gif and setcue-features.mp4,', frames, 'frames');
+    '-loop', '0', path.join(OUT, `${L.name}.gif`));
+  console.log(`wrote ${L.name}.gif and ${L.name}.mp4,`, frames, 'frames');
 })();
