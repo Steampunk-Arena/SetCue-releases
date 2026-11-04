@@ -17,8 +17,8 @@ node marketing/features/render.js
 ## Animated version
 
 - `out/setcue-features.gif`: 540×675, loops, 5.3 s (eight beats). For websites, email, Gumroad and anywhere that plays GIFs.
-- `out/setcue-features.mp4`: 1080×1350 with the song.
-- `out/setcue-features-square.gif` (540×540) and `out/setcue-features-square.mp4` (1080×1080): the square version; add `square` to the command below. For Facebook and Instagram, which play MP4s better than GIFs.
+- `out/setcue-features.mp4`: 1080×1350 with the song. For Facebook and Instagram, which play MP4s better than GIFs.
+- `out/setcue-features-square.gif` (540×540) and `out/setcue-features-square.mp4` (1080×1080): the square version; add `square` to the command below.
 
 The top window's visualizer plays Neon Gateway (Ultraviolet palette) to "Outrunning Ghosts" from the demo pack, with its timed lyrics, and the window's glow pulses on each bass hit. Run `render.js` first, then:
 
