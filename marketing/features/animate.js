@@ -18,8 +18,8 @@ const LAYOUTS = {
 };
 const L = LAYOUTS[LAYOUT];
 const W = 1080, H = L.H, FPS = 20;
-const BPM = 90, BEATS = 8, START = 57.0;          // eight beats from "Every second counts when you're racing with the clock"
-const DUR = BEATS * 60 / BPM;
+const START = 57.0;                               // from "Every second counts when you're racing with the clock"
+const DUR = 10;                                   // 15 beats of the song's 90 BPM
 const OUT = path.join(__dirname, 'out');
 const WORK = path.join(__dirname, 'work', LAYOUT);
 const BASE = path.join(OUT, L.base);

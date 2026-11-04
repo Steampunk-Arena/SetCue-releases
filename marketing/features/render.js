@@ -67,8 +67,6 @@ function appShot({ x, y, w, h }, left, top, width) {
     background:url('${APP}') ${-x * s}px ${-y * s}px/${3200 * s}px ${2000 * s}px no-repeat"></div>`;
 }
 
-// Every feature is in the current Windows, Mac and Linux versions.
-const legend = size => `<b style="color:var(--text)">Windows · Mac · Linux</b> · all up to date <span class="tag new" style="font-size:${size}px">EVERY FEATURE</span>`;
 
 function portrait() {
   const W = 1080, H = 1350;
@@ -80,8 +78,7 @@ function portrait() {
     <div style="position:absolute;left:72px;right:72px;top:128px;font-size:25px;line-height:1.35;color:var(--muted)">${SUBTITLE}</div>
     ${appShot({ x: 0, y: 0, w: 3200, h: 1000 }, 72, 218, 936)}
     ${grid(GROUPS, 21, 'left:72px;right:72px;top:526px')}
-    <div style="position:absolute;left:72px;right:72px;bottom:44px;display:flex;justify-content:space-between;align-items:center">
-      <div style="font-size:17px;color:var(--muted);white-space:nowrap">${legend(12)}</div>
+    <div style="position:absolute;left:72px;right:72px;bottom:44px;display:flex;justify-content:center;align-items:center">
       <div class="pill" style="font-size:22px;padding:14px 24px;white-space:nowrap">Free 14-day demo · getsetcue.com</div>
     </div>
   `);
@@ -98,7 +95,6 @@ function landscape() {
     </div>
     ${appShot({ x: 0, y: 0, w: 3200, h: 1480 }, 80, 440, 860)}
     ${grid(GROUPS, 24, 'left:1010px;right:76px;top:70px')}
-    <div style="position:absolute;left:80px;bottom:58px;font-size:22px;color:var(--muted)">${legend(16)}</div>
     <div class="pill" style="position:absolute;right:76px;bottom:44px;font-size:28px;padding:16px 30px">Free 14-day demo · getsetcue.com</div>
   `);
 }
@@ -113,8 +109,7 @@ function square() {
     <div style="position:absolute;left:72px;right:72px;top:116px;font-size:21px;line-height:1.35;color:var(--muted)">${SUBTITLE}</div>
     ${appShot({ x: 0, y: 0, w: 3200, h: 1000 }, 72, 196, 936)}
     ${grid(GROUPS, 17, 'left:72px;right:72px;top:510px', true)}
-    <div style="position:absolute;left:72px;right:72px;bottom:36px;display:flex;justify-content:space-between;align-items:center">
-      <div style="font-size:15px;color:var(--muted)">${legend(11)}</div>
+    <div style="position:absolute;left:72px;right:72px;bottom:36px;display:flex;justify-content:center;align-items:center">
       <div class="pill" style="font-size:21px;padding:12px 22px;white-space:nowrap">Free 14-day demo · getsetcue.com</div>
     </div>
   `);
