@@ -10,7 +10,6 @@ const APP = 'data:image/jpeg;base64,' + fs.readFileSync(path.join(__dirname, '..
 
 const SUBTITLE = 'Upgrade your space with an offline desktop DJ app that plays both Music and Videos. Available for PC, Mac and Linux Users.';
 
-// Features marked `win` are in the Windows version now and coming to Mac and Linux.
 const GROUPS = [
   { icon: '🎧', title: 'Mix like a DJ', color: 'var(--pink)', items: [
     ['Two decks + Auto DJ', 'timed auto-fades'],
@@ -22,12 +21,12 @@ const GROUPS = [
     ['20+ visualizers', 'palettes that hit the beat'],
     ['Every screen', 'pop out or span monitors', 'new'],
     ['Lyrics on screen', 'timed, karaoke style'],
-    ['Music videos', 'crossfade the picture', 'win'],
+    ['Music videos', 'crossfade the picture'],
   ] },
   { icon: '💡', title: 'Plug in your gear', color: '#ffd166', items: [
-    ['DJ lights', 'DMX-512, on the beat', 'win'],
-    ['MIDI controllers', 'map with MIDI learn', 'win'],
-    ['Scratching', 'jog wheel or mouse', 'win'],
+    ['DJ lights', 'DMX-512, on the beat'],
+    ['MIDI controllers', 'map with MIDI learn'],
+    ['Scratching', 'jog wheel or mouse'],
     ['Headphone cue', 'preview the next track'],
   ] },
   { icon: '💾', title: 'Your music', color: '#b98cff', items: [
@@ -68,7 +67,8 @@ function appShot({ x, y, w, h }, left, top, width) {
     background:url('${APP}') ${-x * s}px ${-y * s}px/${3200 * s}px ${2000 * s}px no-repeat"></div>`;
 }
 
-const legend = size => `<span class="tag win" style="font-size:${size}px">WINDOWS</span> in the Windows version now, coming soon to Mac &amp; Linux`;
+// Every feature is in the current Windows, Mac and Linux versions.
+const legend = size => `<b style="color:var(--text)">Windows · Mac · Linux</b> · all up to date <span class="tag new" style="font-size:${size}px">EVERY FEATURE</span>`;
 
 function portrait() {
   const W = 1080, H = 1350;
@@ -81,7 +81,7 @@ function portrait() {
     ${appShot({ x: 0, y: 0, w: 3200, h: 1000 }, 72, 218, 936)}
     ${grid(GROUPS, 21, 'left:72px;right:72px;top:526px')}
     <div style="position:absolute;left:72px;right:72px;bottom:44px;display:flex;justify-content:space-between;align-items:center">
-      <div style="font-size:17px;color:var(--muted);max-width:440px;line-height:1.5">${legend(12)}</div>
+      <div style="font-size:17px;color:var(--muted);white-space:nowrap">${legend(12)}</div>
       <div class="pill" style="font-size:22px;padding:14px 24px;white-space:nowrap">Free 14-day demo · getsetcue.com</div>
     </div>
   `);
@@ -98,7 +98,7 @@ function landscape() {
     </div>
     ${appShot({ x: 0, y: 0, w: 3200, h: 1480 }, 80, 440, 860)}
     ${grid(GROUPS, 24, 'left:1010px;right:76px;top:70px')}
-    <div style="position:absolute;left:80px;bottom:56px;font-size:19px;color:var(--muted)">${legend(14)}</div>
+    <div style="position:absolute;left:80px;bottom:58px;font-size:22px;color:var(--muted)">${legend(16)}</div>
     <div class="pill" style="position:absolute;right:76px;bottom:44px;font-size:28px;padding:16px 30px">Free 14-day demo · getsetcue.com</div>
   `);
 }

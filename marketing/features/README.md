@@ -8,7 +8,7 @@
 | `out/setcue-features-1080x1350.png` | 1080×1350 | Facebook / Instagram feed |
 | `out/setcue-features-1920x1080.png` | 1920×1080 | Website, Gumroad, YouTube |
 
-Features tagged WINDOWS are in the Windows version now and coming to Mac and Linux. Edit `GROUPS` in `render.js` as features ship, then:
+Every feature is in the current Windows, Mac and Linux versions, which the footer says. Edit `GROUPS` in `render.js` as features ship, then:
 
 ```sh
 node marketing/features/render.js
